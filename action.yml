@@ -23,9 +23,38 @@ inputs:
     description: 'The branch into which you want your code merged.'
     required: false
     default: "main"
+  pr_title:
+    description: 'The PR title which will be defined in the PR'
+    required: false
+  pr_body:
+    description: 'The PR body which will be defined in the PR'
+    required: false
+  commit_msg:
+    description: 'The commit message which will be used.'
+    required: false
   pull_request_reviewers:
     description: 'Pull request reviewers users'
     required: false
+  github_server:
+    description: 'Github server'
+    required: false
+    default: "github.com"
+  recursive:
+    description: 'If `false` is specified, only source_folder will be copied, otherwise, the entire subtree will be copied.'
+    required: false
+    default: "true"
+  allow_force_push:
+    description: 'Allow force push'
+    required: false
+    default: "false"
+  create_as_draft:
+    description: 'Create pull request as draft'
+    required: false
+    default: "false"
+  clone_from_destination_base:
+    description: 'If `true` is specified, clone the repository from the destination base branch (the same as clone, checkout and pull the destination base branch).'
+    required: false
+    default: "false"
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -37,7 +66,15 @@ runs:
     - ${{ inputs.user-name }}
     - ${{ inputs.destination-head-branch }}
     - ${{ inputs.destination-base-branch }}
+    - ${{ inputs.pr-title }}
+    - ${{ inputs.pr-body }}
+    - ${{ inputs.commit-msg }}
     - ${{ inputs.pull-request-reviewers }}
+    - ${{ inputs.github-server }}
+    - ${{ inputs.recursive }}
+    - ${{ inputs.allow-force-push }}
+    - ${{ inputs.create-as-draft }}
+    - ${{ inputs.clone-from-destination-base }}
 branding:
   icon: 'git-commit'
   color: 'green'
