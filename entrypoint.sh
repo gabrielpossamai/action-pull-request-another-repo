@@ -47,21 +47,21 @@ else
 fi
 
 PR_TITLE=$INPUT_PR_TITLE
-if [ -z $INPUT_PR_TITLE ]
+if [ -z "$INPUT_PR_TITLE" ]
 then
     echo "PR title not defined, using destination head branch as PR title"
     PR_TITLE=$INPUT_DESTINATION_HEAD_BRANCH
 fi
 
 PR_BODY=$INPUT_PR_BODY
-if [ -z $INPUT_PR_BODY ]
+if [ -z "$INPUT_PR_BODY" ]
 then
     echo "PR body not defined, using destination head branch as PR body"
     PR_BODY=$INPUT_DESTINATION_HEAD_BRANCH
 fi
 
 COMMIT_MSG=$INPUT_COMMIT_MSG
-if [ -z $INPUT_COMMIT_MSG ]
+if [ -z "$INPUT_COMMIT_MSG" ]
 then
     echo "Commit message not defined, using default commit message"
     COMMIT_MSG="Update from https://$INPUT_GITHUB_SERVER/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
