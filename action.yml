@@ -55,6 +55,9 @@ inputs:
     description: 'If `true` is specified, clone the repository from the destination base branch (the same as clone, checkout and pull the destination base branch).'
     required: false
     default: "false"
+outputs:
+  pr_url:
+    description: "The URL of the created pull request"
 runs:
   using: 'docker'
   image: 'Dockerfile'

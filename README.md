@@ -57,6 +57,33 @@ This GitHub Action copies a folder from the current repository to a location in 
 * **create_as_draft**: [optional] If `true` specified, the action will create the pull request as a draft. Default is `false`.
 * **clone_from_destination_base**: [optional] If `true` specified, the action will clone the destination repository from the base branch (the same as clone, checkout and pull the destination base branch). Default is `false`.
 
+## Outputs
+
+* **pr_url**: The URL of the created pull request.
+
+### How to use the output
+
+```yaml
+    name: Pull Request Another Repository
+    on: push
+
+    jobs:
+    pull-request:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: Create Pull Request in Another Repo
+          id: create_pr
+          uses: gabrielpossamai/action-pull-request-another-repo@main
+          with:
+            # your inputs
+    
+        - name: Get PR URL
+          run: echo "The PR URL is ${{ steps.create_pr.outputs.pr_url }}"
+```
+
 ## ENV
 
 * **API_TOKEN_GITHUB**: You must create a personal access token in your account. Follow the link:

@@ -109,12 +109,14 @@ then
   echo "Pushing git commit"
   git push -u$FORCE_PUSH origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
   echo "Creating a pull request"
-  gh pr create -t "$PR_TITLE" \
+  PR_OUTPUT=$(gh pr create -t "$PR_TITLE" \
                -b "$PR_BODY" \
                -B $INPUT_DESTINATION_BASE_BRANCH \
                -H $INPUT_DESTINATION_HEAD_BRANCH \
                   $PULL_REQUEST_REVIEWERS \
-                  $CREATE_AS_DRAFT
+                  $CREATE_AS_DRAFT)
+  PR_URL=$(echo "$PR_OUTPUT" | tail -n 1)
+  echo "::set-output name=pr_url::$PR_URL"
 else
   echo "No changes detected"
 fi
