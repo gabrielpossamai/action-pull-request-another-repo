@@ -75,6 +75,8 @@ else
   CLONE_FROM_BRANCH=''
 fi
 
+BRANCH_EXISTS=$(git show-ref "$INPUT_DESTINATION_HEAD_BRANCH" | wc -l)
+
 CLONE_DIR=$(mktemp -d)
 
 echo "Setting git variables"
@@ -90,7 +92,15 @@ echo "Copying contents to git repo"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
 cp $CP_OPTION "$INPUT_SOURCE_FOLDER/." "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 cd "$CLONE_DIR"
-git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
+
+echo "Checking if branch already exists"
+git fetch -a
+if [ $BRANCH_EXISTS == 1 ];
+then
+    git checkout "$INPUT_DESTINATION_HEAD_BRANCH"
+else
+    git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
+fi
 
 echo "Adding git commit"
 git add .

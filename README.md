@@ -32,7 +32,7 @@ This GitHub Action copies a folder from the current repository to a location in 
             user_name: 'user-name'
             pull_request_reviewers: 'reviewers'
             github_server: 'github.com'
-            recursive: 'false'
+            recursive: 'true'
             allow_force_push: 'false'
             create_as_draft: 'false'
             clone_from_destination_base: 'false'
